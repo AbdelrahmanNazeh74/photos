@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:photos/splash_screen.dart';
-import 'package:photos/router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:photos/core/router/app_router.dart'; // Import the correct AppRouter
 
 void main() {
   runApp(const MyApp());
@@ -20,10 +19,7 @@ class MyApp extends StatelessWidget {
       builder: (_, child) {
         return MaterialApp.router(
           title: 'Photos App',
-          routerDelegate: router.routerDelegate,
-          routeInformationParser: router.routeInformationParser,
-          routeInformationProvider: router.routeInformationProvider,
-          backButtonDispatcher: router.backButtonDispatcher,
+          routerConfig: AppRouter.router, // Use the AppRouter.router instance
         );
       },
     );

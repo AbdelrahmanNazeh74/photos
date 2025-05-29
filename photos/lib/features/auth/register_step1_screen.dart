@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:photos/core/utils/app_colors.dart';
+import 'package:photos/core/widgets/custom_text.dart';
 import 'package:photos/utils/validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:photos/widgets/custom_text.dart';
 
 class RegisterStep1Screen extends StatefulWidget {
   const RegisterStep1Screen({super.key});
@@ -34,7 +35,7 @@ class _RegisterStep1ScreenState extends State<RegisterStep1Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         leading: IconButton(
           icon: SvgPicture.asset('assets/icons/back_button.svg'),
@@ -42,7 +43,7 @@ class _RegisterStep1ScreenState extends State<RegisterStep1Screen> {
             context.pop();
           },
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.backgroundColor,
         elevation: 0,
       ),
       body: Padding(
@@ -54,16 +55,17 @@ class _RegisterStep1ScreenState extends State<RegisterStep1Screen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               const SizedBox(height: 20),
-              CustomText(
+              const CustomText(
                 text: 'Register',
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 textAlign: TextAlign.center,
+                color: Colors.black,
               ),
               const SizedBox(height: 40),
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.symmetric(
@@ -74,12 +76,12 @@ class _RegisterStep1ScreenState extends State<RegisterStep1Screen> {
                 validator: Validators.validateEmail,
                 keyboardType: TextInputType.emailAddress,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 controller: _passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _isPasswordVisible
@@ -96,20 +98,20 @@ class _RegisterStep1ScreenState extends State<RegisterStep1Screen> {
                 validator: Validators.validatePassword,
                 obscureText: !_isPasswordVisible,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _nextStep,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
-                  minimumSize: Size(double.infinity, 50),
-                  padding: EdgeInsets.symmetric(vertical: 15),
+                  minimumSize: const Size(double.infinity, 50),
+                  padding: const EdgeInsets.symmetric(vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                       5,
                     ), // Adjust border radius as needed
                   ),
                 ),
-                child: CustomText(
+                child: const CustomText(
                   text: 'NEXT',
                   color: Colors.white,
                   fontSize: 16,

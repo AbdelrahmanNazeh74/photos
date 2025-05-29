@@ -7,5 +7,7 @@ class AppColors {
   static const Color backgroundColor = Color(0xFFF5F5F5);
   static const Color textColor = Color(0xFF212121);
   static const Color errorColor = Color(0xFFD32F2F);
+  //FF00D6
+  static const Color addButtonColor = Color(0xFFFF00D6);
   static const Color successColor = Color(0xFF388E3C);
 }

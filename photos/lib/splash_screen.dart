@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:photos/core/custom_button.dart';
 import 'package:go_router/go_router.dart';
@@ -31,7 +32,6 @@ class _SplashScreenState extends State<SplashScreen>
       end: Offset.zero, // End at original position
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
-    // Start timer to show buttons after 3 seconds
     Timer(const Duration(seconds: 2), () {
       if (mounted) {
         setState(() {
@@ -58,36 +58,36 @@ class _SplashScreenState extends State<SplashScreen>
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset('assets/images/splash_photo.png', height: 80),
+              Image.asset('assets/images/splash_photo.png', height: 80.h),
             ],
           ),
-          // Buttons at the bottom (conditionally displayed and animated)
           if (_showButtons)
             Positioned(
               left: 0,
               right: 0,
-              bottom: 40, // Adjust as needed
+              bottom: 40.h,
               child: SlideTransition(
                 position: _offsetAnimation,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Expanded(
                         child: CustomButton(
                           onPressed: () => context.push('/login'),
-                          content: CustomText(text: 'LOG IN'),
+                          content: CustomText(text: 'LOG IN', fontSize: 16.sp),
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(width: 20),
+                      SizedBox(width: 20.w),
                       Expanded(
                         child: CustomButton(
                           onPressed: () => context.push('/register_step1'),
                           content: CustomText(
                             text: 'REGISTER',
                             color: Colors.white,
+                            fontSize: 16.sp,
                           ),
                           color: Colors.black,
                         ),

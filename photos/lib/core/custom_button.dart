@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButton extends StatelessWidget {
   final void Function()? onPressed; // Updated type
@@ -30,13 +30,13 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      height: height,
-      padding: EdgeInsets.all(padding),
+      width: width.w,
+      height: height.h,
+      padding: EdgeInsets.all(padding.w),
       decoration: BoxDecoration(
         color: !disabled ? color : Colors.grey,
-        borderRadius: BorderRadius.circular(radius),
-        border: addBorder ? Border.all(color: borderColor, width: 1) : null,
+        borderRadius: BorderRadius.circular(radius.r),
+        border: addBorder ? Border.all(color: borderColor, width: 1.w) : null,
       ),
       child: MaterialButton(
         onPressed: disabled ? null : onPressed, // Removed unnecessary lambda

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "789862142999",
+    "project_id": "photo-app-2c3e2",
+    "storage_bucket": "photo-app-2c3e2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789862142999:android:dcbd556f623e547779b852",
+        "android_client_info": {
+          "package_name": "com.nazeh.photos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHkIR36pw9pKVJX2SwrBkhDqp5z2Hyi6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

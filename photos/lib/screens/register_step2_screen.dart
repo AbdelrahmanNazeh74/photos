@@ -71,9 +71,8 @@ class _RegisterStep2ScreenState extends State<RegisterStep2Screen> {
                     horizontal: 10,
                   ),
                 ),
-                validator:
-                    Validators
-                        .validateEmail, // Using email validator for now, can be updated
+                validator: Validators
+                    .validateEmail, // Using email validator for now, can be updated
                 keyboardType: TextInputType.text,
               ),
               SizedBox(height: 20),

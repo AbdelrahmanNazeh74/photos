@@ -21,7 +21,12 @@ class _MainWrapperScreenState extends State<MainWrapperScreen> {
     const SearchScreen(),
     const SizedBox.shrink(), // Placeholder for the middle button
     const ChatScreen(),
-    const ProfileScreen(),
+    const ProfileScreen(
+      isCurrentUserProfile: true,
+      userLocation:
+          'Giza, Egypt', // Static location for the current user's profile
+      userName: 'Abdelrahman', // Static name for the current user's profile
+    ),
   ];
 
   void _onItemTapped(int index) {

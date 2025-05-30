@@ -50,7 +50,26 @@ class AppRouter {
             ),
             GoRoute(
               path: 'profile',
-              builder: (context, state) => const ProfileScreen(),
+              builder: (context, state) {
+                final Map<String, dynamic>? extraData =
+                    state.extra as Map<String, dynamic>?;
+                final String userId = extraData?['userId'] ?? '';
+                final String userName = extraData?['userName'] ?? 'Profile';
+                final String userAvatarUrl = extraData?['userAvatarUrl'] ?? '';
+                final bool isCurrentUserProfile =
+                    extraData?['isCurrentUserProfile'] ?? false;
+                final String userLocation = extraData?['userLocation'] ?? '';
+                final String tappedImageUrl =
+                    extraData?['tappedImageUrl'] ?? '';
+                return ProfileScreen(
+                  userId: userId,
+                  userName: userName,
+                  userAvatarUrl: userAvatarUrl,
+                  isCurrentUserProfile: isCurrentUserProfile,
+                  userLocation: userLocation,
+                  tappedImageUrl: tappedImageUrl,
+                );
+              },
             ),
           ]),
     ],

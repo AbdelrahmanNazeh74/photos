@@ -8,9 +8,59 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart'; /
 import 'dart:math'; // Import dart:math for random dimensions
 import 'package:photos/features/home/widgets/photo_detail_overlay.dart'; // Import the overlay widget
 import 'package:cached_network_image/cached_network_image.dart'; // Import cached_network_image
+import 'package:go_router/go_router.dart';
+import 'package:photos/core/router/app_router.dart';
 
-class HomeScreen extends StatelessWidget {
+const List<String> _sampleNames = [
+  'Alice',
+  'Bob',
+  'Charlie',
+  'David',
+  'Eve',
+  'Frank',
+  'Grace',
+  'Heidi',
+  'Ivan',
+  'Judy',
+  'Mallory',
+  'Olivia',
+  'Peter',
+  'Quinn',
+  'Riley',
+  'Sam',
+  'Tina',
+  'Uma',
+  'Victor',
+  'Wendy',
+];
+
+const List<String> _sampleLocations = [
+  'New York, NY',
+  'Los Angeles, CA',
+  'Chicago, IL',
+  'Houston, TX',
+  'Phoenix, AZ',
+  'Philadelphia, PA',
+  'San Antonio, TX',
+  'San Diego, CA',
+  'Dallas, TX',
+  'San Jose, CA',
+  'Austin, TX',
+  'Jacksonville, FL',
+  'Columbus, OH',
+  'Fort Worth, TX',
+  'Indianapolis, IN',
+];
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _browseAllItemCount = 10; // Initial item count for Browse All
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +113,24 @@ class HomeScreen extends StatelessWidget {
 
                     return GestureDetector(
                       onTap: () {
-                        // TODO: Implement image tap functionality
+                        // Navigate to profile screen with placeholder user data
+                        context.go(
+                          '/home' + AppRouter.profile,
+                          extra: {
+                            'userId': 'user_id_$index', // Placeholder User ID
+                            'userName': _sampleNames[index %
+                                _sampleNames.length], // Pass the generated name
+                            'userAvatarUrl':
+                                imageUrl, // Pass the tapped image URL as the avatar
+                            'isCurrentUserProfile':
+                                false, // Not current user's profile
+                            'userLocation': _sampleLocations[index %
+                                _sampleLocations
+                                    .length], // Pass the generated location
+                            'tappedImageUrl':
+                                imageUrl, // Pass the tapped image URL
+                          },
+                        );
                       },
                       child: Container(
                         width: 300.w, // Adjusted width to accommodate user info
@@ -99,7 +166,7 @@ class HomeScreen extends StatelessWidget {
                                   radius: 16.r,
                                   backgroundColor: Colors.blueGrey,
                                   backgroundImage: CachedNetworkImageProvider(
-                                      avatarUrl), // Use CachedNetworkImageProvider for CircleAvatar
+                                      imageUrl), // Use the tapped image URL for the small avatar as well
                                   // TODO: Add user image here
                                 ),
                                 SizedBox(
@@ -109,15 +176,17 @@ class HomeScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     CustomText(
-                                      text:
-                                          'User Name', // Placeholder user name
+                                      text: _sampleNames[index %
+                                          _sampleNames
+                                              .length], // Random Placeholder user name from list
                                       fontSize: 12.sp,
                                       fontWeight: FontWeight.bold,
                                       color: AppColors.textColor,
                                     ),
                                     CustomText(
-                                      text:
-                                          'user.email@example.com', // Placeholder user email
+                                      text: _sampleLocations[index %
+                                          _sampleLocations
+                                              .length], // Random Placeholder location from list
                                       fontSize: 10.sp,
                                       color: Colors.grey[600]!,
                                     ),
@@ -146,7 +215,7 @@ class HomeScreen extends StatelessWidget {
                 crossAxisCount: 2, // Number of columns
                 mainAxisSpacing: 16.h,
                 crossAxisSpacing: 16.w,
-                itemCount: 10, // Placeholder item count
+                itemCount: _browseAllItemCount,
                 itemBuilder: (context, index) {
                   // Generate random dimensions for placeholder images to simulate varying heights
                   final int width =
@@ -161,8 +230,8 @@ class HomeScreen extends StatelessWidget {
                       'Angelo Pantazis'; // Example name from design
                   final String userHandle =
                       '@angelopantazis'; // Example handle from design
-                  final String userAvatarUrl =
-                      'https://i.pravatar.cc/50?img=6'; // Example avatar URL
+                  final String userAvatarUrlOverlay =
+                      'https://i.pravatar.cc/50?img=6'; // Example avatar URL for overlay - keep separate
 
                   return GestureDetector(
                     onTap: () {
@@ -180,7 +249,30 @@ class HomeScreen extends StatelessWidget {
                               imageUrl: imageUrl,
                               userName: userName,
                               userHandle: userHandle,
-                              userAvatarUrl: userAvatarUrl,
+                              userAvatarUrl: userAvatarUrlOverlay,
+                              onUserTap: () {
+                                // Navigate to profile screen when user info is tapped
+                                context.go(
+                                  '/home' + AppRouter.profile,
+                                  extra: {
+                                    'userId':
+                                        'user_id_$index', // Placeholder User ID
+                                    'userName':
+                                        userName, // Pass the name from the overlay
+                                    'userAvatarUrl':
+                                        userAvatarUrlOverlay, // Pass the overlay avatar URL as the main avatar
+                                    'isCurrentUserProfile':
+                                        false, // Not current user's profile
+                                    'userLocation': _sampleLocations[index %
+                                        _sampleLocations
+                                            .length], // Pass a random location
+                                    'tappedImageUrl':
+                                        imageUrl, // Pass the tapped image URL
+                                  },
+                                );
+                                Navigator.of(context)
+                                    .pop(); // Close the overlay
+                              },
                             );
                           },
                           transitionBuilder:
@@ -211,7 +303,9 @@ class HomeScreen extends StatelessWidget {
               SizedBox(height: 24.h),
               CustomButton(
                 onPressed: () {
-                  // TODO: Implement See More functionality
+                  setState(() {
+                    _browseAllItemCount += 10; // Add 10 more items
+                  });
                 },
                 radius: 8,
                 width: double.infinity,
@@ -219,10 +313,9 @@ class HomeScreen extends StatelessWidget {
                 borderColor: AppColors.textColor,
                 addBorder: true,
                 content: CustomText(
-                  text: 'See More',
+                  text: 'SEE MORE',
                   fontSize: 16.sp,
                   color: AppColors.textColor,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],

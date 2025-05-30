@@ -10,4 +10,5 @@ class AppColors {
   //FF00D6
   static const Color addButtonColor = Color(0xFFFF00D6);
   static const Color successColor = Color(0xFF388E3C);
+  static const Color textFieldFillColor = Color(0xFFE0E0E0);
 }
